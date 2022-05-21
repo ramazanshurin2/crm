@@ -26,8 +26,7 @@ var tovar = {
     fullPrice: 5000
 }
 
-var tovars = [
-    {
+var tovars = [{
         id: 111,
         name: "Монитор",
         description: "Настольный монитор",
@@ -47,8 +46,8 @@ var tovars = [
     }
 ]
 
-const createRow = (index,tovar) => { 
-   const el = `<tr>
+const createRow = (index, tovar) => {
+    const el = `<tr>
    <td class="table__cell ">${index}</td>
    <td class="table__cell table__cell_left table__cell_name" data-id="${tovar.id}">
      <span class="table__cell-id">id: ${tovar.id}</span>${tovar.name}</td>
@@ -64,17 +63,17 @@ const createRow = (index,tovar) => {
    </td>
  </tr>`
 
- return el;
+    return el;
 }
 
-const text = createRow(3,tovar);
+const text = createRow(3, tovar);
 console.log(text);
 const tableBody = document.querySelector('.table__body');
 tableBody.innerHTML += text;
 
-const renderGoods = tovars => { 
-    for (var i = 0; i < tovars.length; i++){
-        const text = createRow(i+4,tovars[i]);
+const renderGoods = tovars => {
+    for (var i = 0; i < tovars.length; i++) {
+        const text = createRow(i + 4, tovars[i]);
         const tableBody = document.querySelector('.table__body');
         tableBody.innerHTML += text;
     }
@@ -83,3 +82,23 @@ const renderGoods = tovars => {
 
 
 renderGoods(tovars);
+
+const addButton = document.querySelector('.panel__add-goods');
+const overlayModal = document.querySelector('.overlay__modal');
+const modalClose = document.querySelector('.modal__close');
+
+addButton.addEventListener('click', () => {
+    overlay.classList.add('active');
+});
+
+overlay.addEventListener('click', () => {
+    overlay.classList.remove('active');
+});
+
+overlayModal.addEventListener('click', event => {
+    event.stopPropagation();
+});
+
+modalClose.addEventListener('click', () => {
+    overlay.classList.remove('active');
+});
