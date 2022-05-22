@@ -86,19 +86,30 @@ renderGoods(tovars);
 const addButton = document.querySelector('.panel__add-goods');
 const overlayModal = document.querySelector('.overlay__modal');
 const modalClose = document.querySelector('.modal__close');
+const btnDel = document.querySelectorAll('.table__btn_del');
 
 addButton.addEventListener('click', () => {
     overlay.classList.add('active');
 });
 
-overlay.addEventListener('click', () => {
-    overlay.classList.remove('active');
+overlay.addEventListener('click', e => {
+    const target = e.target;
+    if (target.classList.contains('overlay')) {
+        overlay.classList.remove('active');
+    }
 });
 
-overlayModal.addEventListener('click', event => {
-    event.stopPropagation();
-});
+
 
 modalClose.addEventListener('click', () => {
     overlay.classList.remove('active');
+});
+
+btnDel.forEach(e => {
+    e.addEventListener('click', () => {
+        const row = e.closest('tr');
+        console.log(row);
+        row.remove();
+    })
+
 });
